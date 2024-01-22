@@ -9,17 +9,30 @@ pub struct Clock{
 
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
-        let mut  processed_hrs: i32 = hours % 24;
+        let mut  processed_hrs: i32 = hours;
         let mut processed_mins: i32 = minutes; // TODO: Need to do more. currently passing only first 11 tests.
 
-        // Logic for adding minutes into hours if equal to or greater than 60
-        while processed_mins >= 60 {
-            processed_hrs += 1; 
-            processed_hrs %= 24; // Keeping hours witihin bounds
-            processed_mins -= 60;
+        if hours >= 0 {
+            processed_hrs %= 24;
+            
+        } else {
+            // TODO: Logic for when hours are negative (replace the placeholder below)
+            processed_hrs = 0;
+        }
+
+        if minutes >= 0 {
+            // Logic for adding minutes into hours if equal to or greater than 60
+            while processed_mins >= 60 {
+                processed_hrs += 1; 
+                processed_hrs %= 24; // Keeping hours witihin bounds
+                processed_mins -= 60;
+            }
+        } else {
+            // TODO: Logic for when minutes are negative (replace the placeholder below)
+            processed_mins = 0; 
         }
         
-        Clock{
+        Clock {
             hours: processed_hrs,
             minutes: processed_mins
         }
