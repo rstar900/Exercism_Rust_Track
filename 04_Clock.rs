@@ -10,14 +10,14 @@ pub struct Clock{
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
         let mut  processed_hrs: i32 = hours;
-        let mut processed_mins: i32 = minutes; // TODO: Need to do more. currently passing only first 11 tests.
+        let mut processed_mins: i32 = minutes; // TODO: Need to do more. currently passing only first 14 tests.
 
         if hours >= 0 {
             processed_hrs %= 24;
             
         } else {
-            // TODO: Logic for when hours are negative (replace the placeholder below)
-            processed_hrs = 0;
+            // subtract the absolute value of hours mod 24 from 24
+            processed_hrs = 24 - ((-1 * processed_hrs) % 24);
         }
 
         if minutes >= 0 {
