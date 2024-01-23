@@ -10,26 +10,29 @@ pub struct Clock{
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
         let mut  processed_hrs: i32 = hours;
-        let mut processed_mins: i32 = minutes; // TODO: Need to do more. currently passing only first 14 tests.
+        let mut processed_mins: i32 = minutes; 
 
-        if hours >= 0 {
+        if processed_mins >= 0 {
+            // Logic for adding minutes into hours if equal to or greater than 60
+            while processed_mins >= 60 {
+                processed_hrs += 1; 
+                processed_mins -= 60;
+            }
+        } else {
+
+            // get rid of negative minutes and make them positive
+            while processed_mins < 0 {
+                processed_hrs -= 1;
+                processed_mins += 60;
+            } 
+        }
+
+        if processed_hrs >= 0 {
             processed_hrs %= 24;
             
         } else {
             // subtract the absolute value of hours mod 24 from 24
             processed_hrs = 24 - ((-1 * processed_hrs) % 24);
-        }
-
-        if minutes >= 0 {
-            // Logic for adding minutes into hours if equal to or greater than 60
-            while processed_mins >= 60 {
-                processed_hrs += 1; 
-                processed_hrs %= 24; // Keeping hours witihin bounds
-                processed_mins -= 60;
-            }
-        } else {
-            // TODO: Logic for when minutes are negative (replace the placeholder below)
-            processed_mins = 0; 
         }
         
         Clock {
@@ -39,7 +42,8 @@ impl Clock {
     }
 
     pub fn add_minutes(&self, minutes: i32) -> Self {
-        todo!("Add {minutes} minutes to existing Clock time");
+        // TODO: 38th case failing (subtract_more_than_two_days)
+        Clock::new(self.hours, self.minutes + minutes)
     }
 }
 
