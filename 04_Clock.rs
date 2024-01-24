@@ -32,7 +32,7 @@ impl Clock {
             
         } else {
             // subtract the absolute value of hours mod 24 from 24
-            processed_hrs = 24 - ((-1 * processed_hrs) % 24);
+            processed_hrs = (24 - ((-1 * processed_hrs) % 24)) % 24;
         }
         
         Clock {
@@ -42,7 +42,6 @@ impl Clock {
     }
 
     pub fn add_minutes(&self, minutes: i32) -> Self {
-        // TODO: 38th case failing (subtract_more_than_two_days)
         Clock::new(self.hours, self.minutes + minutes)
     }
 }
